@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <img class="popup-logo" src="../icons/logo48.png" alt="Rover">
+      <h1>Rover</h1>
+    </div>
+    <div class="popup-content">
+      <div class="toggle-row">
+        <span>Show Pet</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-pet" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="status-row">
+        <span>Status:</span>
+        <span id="pet-status">Active</span>
+      </div>
+      <div class="input-row">
+        <label for="api-url">Server URL</label>
+        <input type="text" id="api-url" placeholder="https://...">
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
