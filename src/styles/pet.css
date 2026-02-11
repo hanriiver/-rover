@@ -17,6 +17,7 @@
 #shiba-speech {
   position: fixed;
   background: white;
+  color: #333;
   border: 2px solid #333;
   border-radius: 12px;
   padding: 8px 12px;
@@ -63,6 +64,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background: #f9f9f9;
+  color: #333;
   font-size: 13px;
   font-family: 'Comic Sans MS', 'Nanum Gothic', cursive, sans-serif;
   cursor: pointer;
