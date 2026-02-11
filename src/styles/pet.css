@@ -1,0 +1,112 @@
+#shiba-pet {
+  position: fixed;
+  width: 166px;
+  height: 166px;
+  z-index: 999999;
+  cursor: grab;
+  image-rendering: pixelated;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#shiba-pet:active {
+  cursor: grabbing;
+}
+
+#shiba-speech {
+  position: fixed;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-family: 'Comic Sans MS', 'Nanum Gothic', cursive, sans-serif;
+  font-size: 14px;
+  max-width: 180px;
+  z-index: 999998;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  word-break: keep-all;
+}
+
+#shiba-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  border-width: 10px 8px 0;
+  border-style: solid;
+  border-color: #333 transparent transparent;
+}
+
+@keyframes shiba-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+  20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+@keyframes shiba-drip {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(30px); opacity: 0; }
+}
+
+.shiba-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 130px;
+}
+
+.shiba-menu-btn {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 13px;
+  font-family: 'Comic Sans MS', 'Nanum Gothic', cursive, sans-serif;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.shiba-menu-btn:hover {
+  background: #eee;
+}
+
+#shiba-focus-timer {
+  position: fixed;
+  background: #d2691e;
+  color: white;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+  font-size: 15px;
+  font-weight: bold;
+  z-index: 2147483647;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+#shiba-focus-timer:hover {
+  opacity: 0.8;
+}
+
+#shiba-chat-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 16px;
+  z-index: 999999;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
