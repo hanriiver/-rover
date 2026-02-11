@@ -7,7 +7,7 @@ export class KeyboardTracker {
 
     document.addEventListener('keydown', (e) => {
       // ignore if speech bubble input is active
-      if (this.pet.speechBubble.isInputMode || this.pet.speechBubble.isFocusMode) return;
+      if (this.pet.speechBubble.isInputMode) return;
 
       this.keyCount++;
       this.isTyping = true;

@@ -11,8 +11,7 @@ export class SitBehavior extends Behavior {
   chooseNext() {
     return BehaviorManager.weightedRandom({
       idle: 50,
-      bark: 30,
-      walk: 20,
+      walk: 50,
     });
   }
 }
