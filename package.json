@@ -1,0 +1,13 @@
+{
+  "name": "shiba-pet-extension",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "watch": "node esbuild.config.js --watch",
+    "clean": "rm -rf dist",
+    "zip": "node zip.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0"
+  }
+}
