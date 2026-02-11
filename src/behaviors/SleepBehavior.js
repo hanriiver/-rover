@@ -14,10 +14,6 @@ export class SleepBehavior extends Behavior {
     this.zCount = 2;
     this.elapsed = 0;
     this.pet.speechBubble.show('zzZ...', -1);
-    // GIF 한 번 재생 후 정지 (약 1초 후 freeze)
-    setTimeout(() => {
-      this.pet.spriteManager.freeze();
-    }, 1000);
   }
 
   update(dt) {
