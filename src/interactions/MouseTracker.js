@@ -22,10 +22,7 @@ export class MouseTracker {
     document.addEventListener('mouseleave', () => {
       this.mouseInWindow = false;
       this.isIdle = false;
-      const current = this.pet.behaviorManager.current;
-      if (current && current.name === 'chase') {
-        this.pet.behaviorManager.transition('sleep', true);
-      }
+      this.pet.behaviorManager.transition('sleep', true);
     });
   }
 

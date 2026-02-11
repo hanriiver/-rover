@@ -27,7 +27,7 @@ export class DragHandler {
     this.pet.physics.isGrounded = true;
     this.pet.physics.velocityX = 0;
     this.pet.physics.velocityY = 0;
-    this.pet.behaviorManager.transition('idle', true);
+    this.pet.behaviorManager.pause();
     this.pet.spriteManager.play('bounceup');
   }
 
@@ -65,7 +65,7 @@ export class DragHandler {
   checkLanded() {
     if (this.isBouncing && this.pet.physics.isGrounded) {
       this.isBouncing = false;
-      this.pet.behaviorManager.transition('idle');
+      this.pet.behaviorManager.resume();
     }
   }
 }
