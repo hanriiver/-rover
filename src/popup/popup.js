@@ -1,12 +1,12 @@
 const toggle = document.getElementById('toggle-pet');
 const status = document.getElementById('pet-status');
-const apiUrlInput = document.getElementById('api-url');
+const modelSelect = document.getElementById('model-select');
 
-chrome.storage.local.get(['enabled', 'roverApiUrl'], (result) => {
+chrome.storage.local.get(['enabled', 'roverModel'], (result) => {
   const enabled = result.enabled !== false;
   toggle.checked = enabled;
   status.textContent = enabled ? 'Active' : 'Off';
-  apiUrlInput.value = result.roverApiUrl || '';
+  modelSelect.value = result.roverModel || 'gemini-2.5';
 });
 
 toggle.addEventListener('change', () => {
@@ -21,10 +21,6 @@ toggle.addEventListener('change', () => {
   });
 });
 
-apiUrlInput.addEventListener('change', () => {
-  let url = apiUrlInput.value.trim();
-  // Remove trailing slash
-  if (url.endsWith('/')) url = url.slice(0, -1);
-  apiUrlInput.value = url;
-  chrome.storage.local.set({ roverApiUrl: url });
+modelSelect.addEventListener('change', () => {
+  chrome.storage.local.set({ roverModel: modelSelect.value });
 });

@@ -97,6 +97,37 @@ body {
   transform: translateX(20px);
 }
 
+.select-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.select-row label {
+  font-size: 13px;
+  color: #666;
+}
+
+.select-row select {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  background: white;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-row select:focus {
+  border-color: #d2691e;
+}
+
+.select-row select option:disabled {
+  color: #aaa;
+}
+
 .input-row {
   display: flex;
   flex-direction: column;

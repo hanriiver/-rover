@@ -1,3 +1,25 @@
+const API_BASE_URL = process.env.API_BASE_URL;
+
+// Extension 시작 시 API 키 확인 및 생성
+chrome.runtime.onInstalled.addListener(() => ensureApiKey());
+chrome.runtime.onStartup.addListener(() => ensureApiKey());
+
+async function ensureApiKey() {
+  const { roverApiKey } = await chrome.storage.local.get(['roverApiKey']);
+  if (!roverApiKey) {
+    await generateKey();
+  }
+}
+
+async function generateKey() {
+  const res = await fetch(`${API_BASE_URL}/api/keys`, { method: 'POST' });
+  if (!res.ok) throw new Error('Failed to generate API key');
+  const data = await res.json();
+  await chrome.storage.local.set({ roverApiKey: data.api_key });
+  return data.api_key;
+}
+
+// Chat 메시지 처리
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'chat') {
     handleChat(msg.message).then(sendResponse).catch((err) => {
@@ -8,49 +30,33 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 async function handleChat(message) {
-  const { roverApiUrl, roverApiKey } = await chrome.storage.local.get([
-    'roverApiUrl',
-    'roverApiKey',
-  ]);
+  let { roverApiKey, roverModel } = await chrome.storage.local.get(['roverApiKey', 'roverModel']);
 
-  if (!roverApiUrl) {
-    return { message: null };
+  if (!roverApiKey) {
+    roverApiKey = await generateKey();
   }
 
-  let apiKey = roverApiKey;
-
-  if (!apiKey) {
-    apiKey = await generateKey(roverApiUrl);
-  }
+  const model = roverModel || 'gemini-2.5';
 
   try {
-    return await callChat(roverApiUrl, apiKey, message);
+    return await callChat(roverApiKey, message, model);
   } catch (err) {
     if (err.status === 401) {
-      apiKey = await generateKey(roverApiUrl);
-      return await callChat(roverApiUrl, apiKey, message);
+      roverApiKey = await generateKey();
+      return await callChat(roverApiKey, message, model);
     }
     throw err;
   }
 }
 
-async function generateKey(baseUrl) {
-  const res = await fetch(`${baseUrl}/api/keys`, { method: 'POST' });
-  if (!res.ok) throw new Error('Failed to generate API key');
-  const data = await res.json();
-  const apiKey = data.api_key;
-  await chrome.storage.local.set({ roverApiKey: apiKey });
-  return apiKey;
-}
-
-async function callChat(baseUrl, apiKey, message) {
-  const res = await fetch(`${baseUrl}/api/chat`, {
+async function callChat(apiKey, message, model) {
+  const res = await fetch(`${API_BASE_URL}/api/chat`, {
     method: 'POST',
     headers: {
       'X-API-Key': apiKey,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, model }),
   });
 
   if (!res.ok) {

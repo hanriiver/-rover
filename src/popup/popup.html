@@ -22,9 +22,14 @@
         <span>Status:</span>
         <span id="pet-status">Active</span>
       </div>
-      <div class="input-row">
-        <label for="api-url">Server URL</label>
-        <input type="text" id="api-url" placeholder="https://...">
+      <div class="select-row">
+        <label for="model-select">Model</label>
+        <select id="model-select">
+          <option value="gemini-2.5">Gemini 2.5</option>
+          <option value="gpt-4o" disabled>GPT-4o (Pro only)</option>
+          <option value="claude-sonnet" disabled>Claude Sonnet (Pro only)</option>
+          <option value="grok-3" disabled>Grok 3 (Pro only)</option>
+        </select>
       </div>
     </div>
   </div>
