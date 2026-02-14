@@ -97,6 +97,12 @@ body {
   transform: translateX(20px);
 }
 
+.tip {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
 .select-row {
   display: flex;
   flex-direction: column;
@@ -124,7 +130,7 @@ body {
   border-color: #d2691e;
 }
 
-.select-row select option:disabled {
+.select-row select option[data-pro] {
   color: #aaa;
 }
 

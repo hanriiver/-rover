@@ -22,5 +22,11 @@ toggle.addEventListener('change', () => {
 });
 
 modelSelect.addEventListener('change', () => {
+  const selected = modelSelect.options[modelSelect.selectedIndex];
+  if (selected.hasAttribute('data-pro')) {
+    modelSelect.value = 'gemini-2.5';
+    chrome.tabs.create({ url: 'https://return-of-rover.vercel.app/' });
+    return;
+  }
   chrome.storage.local.set({ roverModel: modelSelect.value });
 });
